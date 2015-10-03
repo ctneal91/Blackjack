@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root 'game#index'
+  root 'games#index'
 
-  get 'game/:id' => 'game#show', as: :game
-  post 'games' => 'game#create', as: :games
+  get 'game/:id' => 'games#show', as: :game
+  post 'games' => 'games#create', as: :games
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

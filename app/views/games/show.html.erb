@@ -1,0 +1,18 @@
+<h1>Game#show</h1>
+<p>Find me in app/views/game/show.html.erb</p>
+
+<div class="row">
+  <div class="col-xs-6">
+    <h3>Player Hand</h3>
+    <% @game.player_hand.cards.each do |card| %>
+      <%= card.value %>
+    <% end %>
+  </div>
+  <div class="col-xs-6">
+    <h3>Dealer Hand</h3>
+    <% @game.dealer_hand.cards.each do |card| %>
+      <%= card.value %>
+    <% end %>
+  </div>
+
+</div>
