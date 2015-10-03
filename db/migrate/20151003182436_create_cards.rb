@@ -1,6 +1,7 @@
 class CreateCards < ActiveRecord::Migration
   def change
     create_table :cards do |t|
+      t.integer :position   
       t.string :suit
       t.integer :value
       t.string :name

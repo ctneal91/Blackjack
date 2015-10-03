@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20151003182436) do
   enable_extension "plpgsql"
 
   create_table "cards", force: :cascade do |t|
+    t.integer  "position"
     t.string   "suit"
     t.integer  "value"
     t.string   "name"

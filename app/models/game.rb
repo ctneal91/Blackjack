@@ -10,16 +10,25 @@ class Game < ActiveRecord::Base
     # all have suits "H", "D", "C", "S"
 
     suits = ["H", "D", "C", "S"]
+    positions = (1..52).to_a.shuffle
+
     suits.each do |suit|
       (2..10).each do |val|
-        cards.create suit: suit, value: val, name: val
+        cards.create suit: suit, value: val, name: val, position: positions.shift
       end
       ["J", "Q", "K"].each do |val|
-        cards.create suit: suit, value: 10, name: val
+        cards.create suit: suit, value: 10, name: val, position: positions.shift
       end
-      cards.create suit: suit, value: 11, name: "A"
+      cards.create suit: suit, value: 11, name: "A", position: positions.shift
     end
   end
+
+  player_count = 0
+  
+  def deck
+    cards.order("position")
+  end
+
   def player_hand
     hands.find_by player: true
   end
