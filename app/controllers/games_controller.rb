@@ -36,7 +36,9 @@ class GamesController < ApplicationController
     @game = Game.find params[:id]
 
     if @game.dealer_hand.total < 17
-      @game.dealer_hand.cards << @game.deck.first
+      until @game.dealer_hand.total >= 17
+        @game.dealer_hand.cards << @game.deck.first
+      end
     end
 
     redirect_to game_path(id: @game.id)
