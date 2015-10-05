@@ -30,7 +30,8 @@ class Game < ActiveRecord::Base
   end
 
   def player_wins?
-    player_hand.total > dealer_hand.total
+    if player_hand.total > 21
+    end
   end
 
   def player_hand

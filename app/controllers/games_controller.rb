@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+
+  outcome = nil
   def index
   end
 
