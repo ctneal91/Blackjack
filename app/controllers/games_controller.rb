@@ -19,9 +19,14 @@ class GamesController < ApplicationController
     player_hand.cards << @game.deck.third
     dealer_hand.cards << @game.deck.fourth
 
-    player_count = 0
-    player_hand.cards.each do |card|
-      player_count = player_count + card.value
+    redirect_to game_path(id: @game.id)
+  end
+
+  def hit
+    @game = Game.find params[:id]
+
+    if @game.player_hand.total < 21
+      @game.player_hand.cards << @game.deck.first
     end
 
     redirect_to game_path(id: @game.id)

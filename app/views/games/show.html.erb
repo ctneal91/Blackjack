@@ -1,24 +1,32 @@
 <h1>Game#show</h1>
 <p>Find me in app/views/game/show.html.erb</p>
-<% player_count = 0 %>
-<% dealer_count = 0 %>
+
+<div class="playing">
+  <%= link_to "Hit", hit_game_path(id: @game.id), class: "btn btn-success btn-lg", method: :post %>
+  <!-- <% if @game.player_wins? %>
+    <div class="victory">
+      Woo!!!
+    </div>
+  <% else %>
+    <div class="defeat">
+      Boo!!!
+    </div>
+  <% end %> -->
+</div>
 
 <div class="row">
   <div class="col-xs-6">
     <h3>Player Hand</h3>
     <% @game.player_hand.cards.each do |card| %>
-      <%= card.value %><%= card.suit %>
-      <% player_count = player_count + card.value %>
+      <%= image_tag "#{card.name}#{card.suit}.png" %>
     <% end %>
-    <p><%= player_count %></p>
+    <%= image_tag "card-back.png" %>
   </div>
   <div class="col-xs-6">
     <h3>Dealer Hand</h3>
     <% @game.dealer_hand.cards.each do |card| %>
-      <%= card.name %><%= card.suit %>
-      <% dealer_count = dealer_count + card.value %>
+      <%= image_tag "#{card.name}#{card.suit}.png" %>
     <% end %>
-    <p><%= dealer_count %></p>
   </div>
 
 </div>

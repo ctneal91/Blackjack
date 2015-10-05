@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'game/:id' => 'games#show', as: :game
   post 'games' => 'games#create', as: :games
 
+  post 'game/:id/hit' => 'games#hit', as: :hit_game
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

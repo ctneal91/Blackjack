@@ -24,9 +24,13 @@ class Game < ActiveRecord::Base
   end
 
   player_count = 0
-  
+
   def deck
-    cards.order("position")
+    cards.where(hand_id: nil).order("position")
+  end
+
+  def player_wins?
+    player_hand.total > dealer_hand.total
   end
 
   def player_hand
