@@ -6,26 +6,28 @@
   <%= link_to "Play Again", games_path, class: "btn btn-success btn-lg", method: :post %>
   <div class="Winner">
     <% if @game.player_wins == true %>
-        You win! Congratulations!
+      <% if @game.player_hand.blackjack == true %>
+        <h1><center>Blackjack, MoFo!<center><h1>
+      <% else %>
+        <h2>You win! Congratulations!</h2>
+      <% end %>
     <% elsif @game.dealer_wins == true %>
-        Sorry...Dealer wins.
+        <h2>Sorry...Dealer wins. Please try again.</h2>
     <% elsif @game.push == true %>
-        Push. A tie is not win, but it is not a loss either.
-    <% else %>
-      Who Shall Win???
+        <h2>Push. A tie is not win, but it is not a loss either.</h2>
     <% end %>
   </div>
 </div>
 
 <div class="row">
   <div class="col-xs-6">
-    <h3>Player Hand</h3>
+    <h3 class="hands">Player Hand</h3>
       <% @game.player_hand.cards.each do |card| %>
           <%= image_tag "#{card.name}#{card.suit}.png" %>
       <% end %>
   </div>
   <div class="col-xs-6">
-    <h3>Dealer Hand</h3>
+    <h3 class="hands">Dealer Hand</h3>
     <% if @game.dealer_hand.cards.count == 2 %>
       <%= image_tag "#{@game.dealer_hand.cards.first.name}#{@game.dealer_hand.cards.first.suit}.png" %>
       <% if @game.dealer_hand.dealer_must_reveal == false %>
@@ -39,5 +41,4 @@
       <% end %>
     <% end %>
   </div>
-
 </div>
