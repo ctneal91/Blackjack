@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post 'games' => 'games#create', as: :games
 
   post 'game/:id/hit' => 'games#hit', as: :hit_game
-  post 'game/:id/stay' => 'games#stay', as: :stay_game
+  patch 'game/:id/stay' => 'games#stay', as: :stay_game
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

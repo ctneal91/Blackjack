@@ -47,3 +47,8 @@ end
 
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'underscore-rails'
+gem 'faker'
+gem 'simple_form'
+gem 'rails_12factor'
+gem 'react-rails', '~> 1.0'
+gem 'minitest-rails'

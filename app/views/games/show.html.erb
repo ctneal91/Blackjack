@@ -1,44 +1,20 @@
-<h1>Game#show</h1>
-<p>Find me in app/views/game/show.html.erb</p>
-
 <div class="playing">
-  <%= link_to "Hit", hit_game_path(id: @game.id), class: "btn btn-success btn-lg", method: :post %>
-  <%= link_to "Stay", stay_game_path(id: @game.id), class: "btn btn-success btn-lg", method: :post %>
-  <% if (@game.player_hand.total == 21) && (@game.player_hand.cards.count == 2) %>
-    <div class="player_blackjack">
-      Blackjack!!! Congratulations!!!
-    </div>
-  <% elsif (@game.dealer_hand.total == 21) && (@game.dealer_hand.cards.count == 2)%>
-    <div class="dealer_blackjack">
-      Blackjack...for the dealer. You lose.
-    </div>
-  <% elsif (@game.player_hand.total <= 21) && (@game.player_hand.cards.count == 6) %>
-    <div class="six_cards_win">
-      Player wins because he drew six cards without going over 21!!!
-    </div>
-  <% elsif @game.player_hand.total > 21 %>
-    <div class="player_busts">
-      You busted!!!
-    </div>
-  <% elsif @game.dealer_hand.total > 21 %>
-    <div class="dealer_busts">
-      Dealer Busts!!!
-    </div>
-  <% elsif (@game.dealer_hand.total >= 17)%>
-    <% if (@game.player_hand.total > @game.dealer_hand.total) %>
-      <div class="player_wins">
-        Player Wins!!!
-      </div>
-    <% elsif (@game.player_hand.total < @game.dealer_hand.total) %>
-      <div class="dealer_wins">
-        Dealer Wins!!!
-      </div>
-    <% else %>
-      <div class="push">
-        Push. It's like kissing your sister.
-      </div>
-    <% end %>
+  <% if (@game.player_wins == false) && (@game.dealer_wins == false) && (@game.push == false) %>
+    <%= link_to "Hit", hit_game_path(id: @game.id), class: "btn btn-success btn-lg", method: :post %>
+    <%= link_to "Stay", stay_game_path(id: @game.id), class: "btn btn-success btn-lg", method: :patch %>
   <% end %>
+  <%= link_to "Play Again", games_path, class: "btn btn-success btn-lg", method: :post %>
+  <div class="Winner">
+    <% if @game.player_wins == true %>
+        You win! Congratulations!
+    <% elsif @game.dealer_wins == true %>
+        Sorry...Dealer wins.
+    <% elsif @game.push == true %>
+        Push. A tie is not win, but it is not a loss either.
+    <% else %>
+      Who Shall Win???
+    <% end %>
+  </div>
 </div>
 
 <div class="row">
@@ -50,8 +26,18 @@
   </div>
   <div class="col-xs-6">
     <h3>Dealer Hand</h3>
-    <%= image_tag "#{@game.dealer_hand.cards.first.name}#{@game.dealer_hand.cards.first.suit}.png" %>
-    <%= image_tag "card-back.png"%>
+    <% if @game.dealer_hand.cards.count == 2 %>
+      <%= image_tag "#{@game.dealer_hand.cards.first.name}#{@game.dealer_hand.cards.first.suit}.png" %>
+      <% if @game.dealer_hand.dealer_must_reveal == false %>
+        <%= image_tag "card-back.png"%>
+      <% else %>
+        <%= image_tag "#{@game.dealer_hand.cards.second.name}#{@game.dealer_hand.cards.second.suit}.png" %>
+      <% end %>
+    <% elsif @game.dealer_hand.cards.count > 2 %>
+      <% @game.dealer_hand.cards.each do |card| %>
+        <%= image_tag "#{card.name}#{card.suit}.png" %>
+      <% end %>
+    <% end %>
   </div>
 
 </div>

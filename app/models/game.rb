@@ -29,11 +29,6 @@ class Game < ActiveRecord::Base
     cards.where(hand_id: nil).order("position")
   end
 
-  def player_wins?
-    if player_hand.total > 21
-    end
-  end
-
   def player_hand
     hands.find_by player: true
   end
